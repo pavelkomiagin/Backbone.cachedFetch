@@ -11,8 +11,8 @@ Include Backbone.cachedFetch after having included Backbone.js:
 <script type="text/javascript" src="backbone.cachedFetch.js"></script>
 ```
 
-Use `cachedFetch()` method instead of `fetch()`. Send optional `expireTime` to say how long this cache should be considered valid (3600000 ms = 1 hour by default).
-If there is a valid cache, the collection will be created from it. Unless it will be requested from the server:
+Use `cachedFetch()` method instead of `fetch()`. Send optional `expireTime` to define how long this cache should be considered valid (3600000 ms = 1 hour by default).
+If there is a valid cache, the collection will be created from it. Otherwise it will be requested from the server:
 
 ```javascript
 myModel.cachedFetch();
