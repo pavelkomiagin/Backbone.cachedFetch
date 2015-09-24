@@ -58,16 +58,15 @@
   var expirationStore = new StoreWithExpiration();
   Backbone.Collection.extend({
 
-    cacheKey: 'bbCollection_' + this.url,
-
     cachedFetch: function(options) {
       options = options || {};
       var expireTime = options.expireTime || 60 * 60 * 1000;
+      var cacheKey = 'bbCollection_' + this.url;
 
       if (!window.localStorage)
         return this.fetch(options);
 
-      var cachedData = expirationStore.get(this.cacheKey);
+      var cachedData = expirationStore.get(cacheKey);
       var cachedModels = cachedData ? cachedData.value : [];
       var success = options.success;
 
@@ -103,20 +102,17 @@
 
   });
 
-
-
   Backbone.Model.extend({
-
-    cacheKey: 'bbModel_' + this.url + '_' + this.id,
 
     cachedFetch: function(options) {
       options = options || {};
       var expireTime = options.expireTime || 60 * 60 * 1000;
+      var cacheKey = 'bbModel_' + this.url + '_' + this.id;
 
       if (!window.localStorage)
         return this.fetch(options);
 
-      var cachedData = expirationStore.get(this.cacheKey);
+      var cachedData = expirationStore.get(cacheKey);
       var cachedModel = cachedData ? cachedData.value : {};
       var success = options.success;
 
@@ -126,7 +122,7 @@
           if (success)
             success.call(options.context, this, resp, options);
 
-          expirationStore.set(this.cacheKey, {
+          expirationStore.set(cacheKey, {
             value: this.models,
             expireTime: expireTime
           });
