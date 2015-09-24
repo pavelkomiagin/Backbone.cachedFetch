@@ -56,7 +56,7 @@
   };
 
   var expirationStore = new StoreWithExpiration();
-  Backbone.Collection.extend({
+  Backbone.Collection = Backbone.Collection.extend({
 
     cachedFetch: function(options) {
       options = options || {};
@@ -71,15 +71,11 @@
       var success = options.success;
 
       if (!cachedData) {
-
         options.success = _.bind(function (resp) {
           if (success)
             success.call(options.context, this, resp, options);
 
-          expirationStore.set(cacheKey, {
-            value: this.models,
-            expireTime: expireTime
-          });
+          expirationStore.set(cacheKey, this.models, expireTime);
 
         }, this);
         return this.fetch(options);
@@ -94,15 +90,12 @@
           success.call(options.context, this, cachedModels, options);
 
         this.trigger('sync', this, cachedModels, options);
-
         return this.sync('cachedRead', this, options);
-
       }
     }
-
   });
 
-  Backbone.Model.extend({
+  Backbone.Model = Backbone.Model.extend({
 
     cachedFetch: function(options) {
       options = options || {};
@@ -117,15 +110,11 @@
       var success = options.success;
 
       if (!cachedData) {
-
         options.success = _.bind(function (resp) {
           if (success)
             success.call(options.context, this, resp, options);
 
-          expirationStore.set(cacheKey, {
-            value: this.models,
-            expireTime: expireTime
-          });
+          expirationStore.set(cacheKey, this.models, expireTime);
 
         }, this);
         return this.fetch(options);
@@ -142,15 +131,13 @@
           success.call(options.context, this, cachedModel, options);
 
         this.trigger('sync', this, cachedModel, options);
-
         return this.sync('cachedRead', this, options);
-
       }
     }
-
   });
 
-  Backbone.Sync = function(method, model, options) {
+  var _sync = Backbone.sync;
+  Backbone.sync = function(method, model, options) {
     if (method === 'cachedRead') {
 
       var _getCacheKey = function() {
@@ -167,8 +154,7 @@
         options.success(_getCachedValue());
 
     } else {
-      return Backbone.sync.apply(this, arguments);
+      return _sync.apply(this, arguments);
     }
   }
-
 }));
