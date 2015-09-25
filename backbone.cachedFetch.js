@@ -1,4 +1,4 @@
-// Backbone.CachedFetch, v1.0.0
+// Backbone.CachedFetch, v1.1.0
 // ----------------------------------
 //
 // Copyright (c) 2015 Pavel Komiagin
