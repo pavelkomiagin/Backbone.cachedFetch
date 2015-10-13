@@ -1,0 +1,25 @@
+{
+  "name": "backbone.cachedfetch",
+  "version": "1.1.0",
+  "description": "Simple methods for fetching Backbone.Model or Backbone.Collection and caching it in LocalStorage. It's available to set expiration time.",
+  "main": "./backbone.cachedFetch.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavelkomiagin/backbone.cachedfetch.git"
+  },
+  "keywords": [
+    "javascript",
+    "backbonejs"
+  ],
+  "author": "Pavel Komiagin <pavel.komiagin@gmail.com> (http://www.pavelkomiagin.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pavelkomiagin/backbone.cachedfetch/issues"
+  },
+  "homepage": "https://github.com/pavelkomiagin/backbone.cachedfetch#readme",
+  "dependencies": {
+    "backbone": "~1.x.x",
+    "jquery": "~2.1.0",
+    "underscore": ">=1.4.0"
+  }
+}
