@@ -19,6 +19,10 @@ myModel.cachedFetch();
 myCollection.cachedFetch({}, { expireTime: 720000 });
 ```
 
+### NodeJS
+
+Install using `npm install backbone.cachedfetch`
+
 ## License
 
 Licensed under MIT license
