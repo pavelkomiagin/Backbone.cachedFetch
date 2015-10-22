@@ -43,8 +43,9 @@
         try {
           var info = JSON.parse(localStorage.getItem(key));
 
-          if (!info || new Date().getTime() - info.cachedAt > info.expireTime)
+          if (!info || new Date().getTime() - info.cachedAt > info.expireTime) {
             return null;
+          }
 
           return info.value;
 
@@ -63,8 +64,9 @@
       var expireTime = options.expireTime || 60 * 60 * 1000;
       var cacheKey = 'bbCollection_' + this.url;
 
-      if (!window.localStorage)
+      if (!window.localStorage) {
         return this.fetch(options);
+      }
 
       var cachedData = expirationStore.get(cacheKey);
       var cachedModels = cachedData ? cachedData.value : [];
@@ -72,8 +74,9 @@
 
       if (!cachedData) {
         options.success = _.bind(function (resp) {
-          if (success)
+          if (success) {
             success.call(options.context, this, resp, options);
+          }
 
           expirationStore.set(cacheKey, this.models, expireTime);
 
@@ -86,8 +89,9 @@
         var method = options.reset ? 'reset' : 'set';
         this[method](cachedModels, options);
 
-        if (success)
+        if (success) {
           success.call(options.context, this, cachedModels, options);
+        }
 
         this.trigger('sync', this, cachedModels, options);
         return this.sync('cachedRead', this, options);
@@ -102,8 +106,9 @@
       var expireTime = options.expireTime || 60 * 60 * 1000;
       var cacheKey = 'bbModel_' + this.url + '_' + this.id;
 
-      if (!window.localStorage)
+      if (!window.localStorage) {
         return this.fetch(options);
+      }
 
       var cachedData = expirationStore.get(cacheKey);
       var cachedModel = cachedData ? cachedData.value : {};
@@ -111,8 +116,9 @@
 
       if (!cachedData) {
         options.success = _.bind(function (resp) {
-          if (success)
+          if (success) {
             success.call(options.context, this, resp, options);
+          }
 
           expirationStore.set(cacheKey, this.models, expireTime);
 
@@ -124,11 +130,13 @@
         options = _.extend({parse: true}, options);
         var serverAttrs = options.parse ? model.parse(cachedModel, options) : cachedModel;
 
-        if (!model.set(serverAttrs, options))
+        if (!model.set(serverAttrs, options)) {
           return false;
+        }
 
-        if (success)
+        if (success) {
           success.call(options.context, this, cachedModel, options);
+        }
 
         this.trigger('sync', this, cachedModel, options);
         return this.sync('cachedRead', this, options);
@@ -150,8 +158,9 @@
         return cachedData ? cachedData.value : empty;
       };
 
-      if (options.success)
+      if (options.success) {
         options.success(_getCachedValue());
+      }
 
     } else {
       return _sync.apply(this, arguments);
