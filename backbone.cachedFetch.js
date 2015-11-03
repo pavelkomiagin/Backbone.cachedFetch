@@ -166,4 +166,6 @@
       return _sync.apply(this, arguments);
     }
   }
+  
+  return Backbone;
 }));
