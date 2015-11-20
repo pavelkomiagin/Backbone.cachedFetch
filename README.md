@@ -1,3 +1,8 @@
+[![License](https://img.shields.io/npm/l/backbone.cachedfetch.svg)](https://img.shields.io/npm/l/backbone.cachedfetch.svg)
+[![Version](https://img.shields.io/npm/v/backbone.cachedfetch.svg)](https://img.shields.io/npm/v/backbone.cachedfetch.svg)
+[![Downloads](https://img.shields.io/npm/dm/backbone.cachedfetch.svg)](https://img.shields.io/npm/dm/backbone.cachedfetch.svg)
+[![Downloads](https://img.shields.io/npm/dt/backbone.cachedfetch.svg)](https://img.shields.io/npm/dt/backbone.cachedfetch.svg)
+
 # Backbone.cachedFetch
 
 Simple methods for fetching Backbone.Model or Backbone.Collection and caching it in LocalStorage. It's available to set expiration time.
